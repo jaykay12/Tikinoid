@@ -6,14 +6,15 @@
 #include <stdlib.h>
 #define PI 3.1415926535898
 
-int w_width=600,w_height=600;
-int x=0,y=0;
-int p,r;
-float iball=300.0,jball=300.0,a=1.0,b=1.0;
+float w_width=600.0,w_height=600.0;
+float x=0.0,y=0.0;
+float p,r;
+float xball=300.0,yball=300.0,a=1.0,b=1.0;
 
 float speed[5]={0.3,0.5,0.6,0.7,0.8};
 int level=0;
 
+float xver,yver;
 
 void init(void)
 {
@@ -35,7 +36,9 @@ GLfloat angle;
 glBegin(GL_POLYGON);
 for(i=0;i<circle_points;i++) {
     angle=2*PI*i/circle_points;
-    glVertex2f(iball+w_width*cos(angle)/35,jball+w_height*sin(angle)/35);
+    xver=xball+w_width*cos(angle)/35;
+    yver=yball+w_height*sin(angle)/35;
+    glVertex2f(xver,yver);
   }
 glEnd();
 
@@ -44,10 +47,19 @@ glEnd();
 glColor3f(0.0,0.0,0.0);
 glBegin(GL_POLYGON);
 {
-  glVertex3i(0,70,0);
-  glVertex3i(w_width,70,0);
-  glVertex3i(w_width,73,0);
-  glVertex3i(0,73,0);
+  glVertex3f(0.0,50.0,0.0);
+  glVertex3f(w_width,50.0,0.0);
+  glVertex3f(w_width,53.0,0.0);
+  glVertex3f(0.0,53.0,0.0);
+}
+glEnd();
+
+glBegin(GL_POLYGON);
+{
+  glVertex3f(0.0,17.0,0.0);
+  glVertex3f(w_width,17.0,0.0);
+  glVertex3f(w_width,20.0,0.0);
+  glVertex3f(0.0,20.0,0.0);
 }
 glEnd();
 
@@ -56,16 +68,16 @@ glEnd();
 
 glBegin(GL_QUADS);
 {
-  for(p=590;p>440;p-=50)
+  for(p=590.0;p>440.0;p-=50.0)
   {
-    for(r=5;r<590;r+=50)
+    for(r=5.0;r<590.0;r+=50.0)
     {
 
       glColor3f(0.0,1.0,0.0);
-      glVertex3f(r,p,0);
-      glVertex3f(r+40,p,0);
-      glVertex3f(r+40,p-40,0);
-      glVertex3f(r,p-40,0);
+      glVertex3f(r,p,0.0);
+      glVertex3f(r+40.0,p,0.0);
+      glVertex3f(r+40.0,p-40.0,0.0);
+      glVertex3f(r,p-40.0,0.0);
     }
   }
 }
@@ -76,10 +88,10 @@ glEnd();
 glColor3f(1.0,0.0,1.0);
 glBegin(GL_QUADS);
 {
-  glVertex3i(300+x,30+y,0);
-  glVertex3i(380+x,30+y,0);
-  glVertex3i(380+x,60+y,0);
-  glVertex3i(300+x,60+y,0);
+  glVertex3f(260.0+x,20.0,0.0);
+  glVertex3f(340.0+x,20.0,0.0);
+  glVertex3f(340.0+x,50.0,0.0);
+  glVertex3f(260.0+x,50.0,0.0);
 }
 glEnd();
 glFinish();
@@ -91,20 +103,25 @@ void reshape(int w, int h)
 {
 	w_height=h;
 	w_width=w;
-glViewport(0, 0, (GLsizei) w, (GLsizei) h);
+glViewport(0,0,(GLsizei)w,(GLsizei)h);
 glMatrixMode(GL_PROJECTION);
 glLoadIdentity();
 glOrtho(0.0,(GLdouble)w,0.0,(GLdouble)h,0.0,1.0);
 }
 
+float speed1=0.05;
 void againDisplay()
-{
-  iball=iball+(a*speed[level]);
-  jball=jball+(b*speed[level]);
-  if((jball>=600.0-150.0)||(jball<=50.0) )
+{ speed1+= 0.00001;
+  xball=xball+(a*speed1);
+  yball=yball+(b*speed1);
+  if((yball>=600.0-150.0)||(((xball<=340.0+x)&&(xball>=260.0+x))&&((yball>=55.0)&&(yball<=70.0))))
   b=-b ;
-  else if((iball>=600-10.0)||(iball<=10.0))
+  else if((xball>=600-10.0)||(xball<=10.0))
   a=-a;
+
+  if(yball<=10.0)
+  glutIdleFunc(NULL);
+  else
   glutPostRedisplay();
 }
 
@@ -113,16 +130,11 @@ void keyboard(unsigned char key, int xm, int ym)
 {
   switch (key)
     {
-      case 'i':y+=5;
+
+      case 'a':x-=12;if(x<-260)x=-260;
       break;
 
-      case 'j':x-=5;
-      break;
-
-      case 'k':y-=5;
-      break;
-
-      case 'l':x+=5;
+      case 'd':x+=12; if(x>260)x=260;
       break;
 
       case 49:level=0;
