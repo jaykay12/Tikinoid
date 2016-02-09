@@ -1,20 +1,24 @@
 #include <GL/freeglut.h>
 #include <stdio.h>
-#include "math.h"
-#include "iostream"
+#include <math.h>
+#include <iostream>
 #include <GL/gl.h>
 #include <stdlib.h>
 #define PI 3.1415926535898
 
 float w_width=600.0,w_height=600.0;
 float x=0.0,y=0.0;
-float p,r;
+int s;
+int r;
 float xball=300.0,yball=300.0,a=1.0,b=1.0;
 
-float speed[5]={0.3,0.5,0.6,0.7,0.8};
+float speed[5]={0.05,0.08,0.1,0.14,0.18};
 int level=0;
 
 float xver,yver;
+int target[600][600];
+
+int flag=1;
 
 void init(void)
 {
@@ -65,19 +69,34 @@ glEnd();
 
 
 //::::::::::Target Blocks::::::::::://
+if(flag==1)
+{
+  for(s=590;s>440;s-=50)
+    {
+      for(r=5;r<590;r+=50)
+        {
+          target[r][s]=1;
+        }
+    }
+  flag=0;
+}
+
+
 
 glBegin(GL_QUADS);
 {
-  for(p=590.0;p>440.0;p-=50.0)
+  for(s=590;s>440;s-=50)
   {
-    for(r=5.0;r<590.0;r+=50.0)
+    for(r=5;r<590;r+=50)
     {
-
-      glColor3f(0.0,1.0,0.0);
-      glVertex3f(r,p,0.0);
-      glVertex3f(r+40.0,p,0.0);
-      glVertex3f(r+40.0,p-40.0,0.0);
-      glVertex3f(r,p-40.0,0.0);
+      if(target[r][s]==1)
+      {
+        glColor3f(0.0,1.0,0.0);
+        glVertex3f(r,s,0.0);
+        glVertex3f(r+40.0,s,0.0);
+        glVertex3f(r+40.0,s-40.0,0.0);
+        glVertex3f(r,s-40.0,0.0);
+      }
     }
   }
 }
@@ -96,6 +115,7 @@ glBegin(GL_QUADS);
 glEnd();
 glFinish();
 glutSwapBuffers();
+
 }
 
 //::::::::::::::RESHAPE FUNCTION:::::::::::::::::://
@@ -109,17 +129,38 @@ glLoadIdentity();
 glOrtho(0.0,(GLdouble)w,0.0,(GLdouble)h,0.0,1.0);
 }
 
-float speed1=0.05;
+
 void againDisplay()
-{ speed1+= 0.00001;
-  xball=xball+(a*speed1);
-  yball=yball+(b*speed1);
-  if((yball>=600.0-150.0)||(((xball<=340.0+x)&&(xball>=260.0+x))&&((yball>=55.0)&&(yball<=70.0))))
+{
+  xball=xball+(a*speed[level]);
+  yball=yball+(b*speed[level]);
+
+for(s=590;s>=490;s-=50)
+   {
+    for(r=5;r<590;r+=50)
+     {
+      if(target[r][s]==1)
+      {
+        if((yball<=s-32)&&(yball>=s-58)&&(xball>=r-2)&&(xball<=r+42)&&(b==1))
+        {
+          b=-b;
+          target[r][s]=0;
+        }
+      }
+    }
+  }
+
+
+
+  if(((xball<=340.0+x)&&(xball>=260.0+x))&&((yball>=55.0)&&(yball<=70.0)))
   b=-b ;
-  else if((xball>=600-10.0)||(xball<=10.0))
+  if(yball>600.0)
+  b=-b;
+
+  if((xball>=600-10.0)||(xball<=10.0))
   a=-a;
 
-  if(yball<=10.0)
+  if(yball<=-30.0)
   glutIdleFunc(NULL);
   else
   glutPostRedisplay();
@@ -131,10 +172,10 @@ void keyboard(unsigned char key, int xm, int ym)
   switch (key)
     {
 
-      case 'a':x-=12;if(x<-260)x=-260;
+      case 'a':x-=10;if(x<-260)x=-260;
       break;
 
-      case 'd':x+=12; if(x>260)x=260;
+      case 'd':x+=10; if(x>260)x=260;
       break;
 
       case 49:level=0;
