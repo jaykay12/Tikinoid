@@ -20,12 +20,39 @@ int target[600][600];
 
 int flag=1;
 
+int jz=0;
+
+
 void init(void)
 {
 glClearColor(1.0,1.0,1.0,0.0);
 glMatrixMode(GL_PROJECTION);
 glLoadIdentity();
 glOrtho(1,w_width,1,w_height,-1,1);
+}
+
+
+//::::::::::::::TEXT Function:::::::::::://
+void drawBitmapText(const char *string,float x,float y,float z)
+{
+    const char *c;
+    glRasterPos3f(x, y,z);
+
+    for (c=string; *c != '\0'; c++)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, *c);
+    }
+}
+
+void drawBitmapText1(const char *string,float x,float y,float z)
+{
+    const char *c;
+    glRasterPos3f(x, y,z);
+
+    for (c=string; *c != '\0'; c++)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *c);
+    }
 }
 
 
@@ -102,6 +129,17 @@ glBegin(GL_QUADS);
 }
 glEnd();
 
+
+//::::::::::::Text:::::::::::://
+glColor3f(0.0,0.0,0.0);
+drawBitmapText("Welcome To Tik-i-noids!!",200,550,0);
+
+glColor3f(1.0,0.0,0.0);
+if(jz==1)
+drawBitmapText1("!!!!GAME OVER!!!!",250,300,0);
+
+
+
 //:::::::::::::Block:::::::::::::::://
 
 glColor3f(1.0,0.0,1.0);
@@ -160,7 +198,11 @@ for(s=590;s>=490;s-=50)
   if((xball>=600-10.0)||(xball<=10.0))
   a=-a;
 
-  if(yball<=-30.0)
+  if(yball<=-20.0)
+  jz=1;
+
+
+  if(yball<=-200.0)
   glutIdleFunc(NULL);
   else
   glutPostRedisplay();
@@ -212,7 +254,7 @@ int main(int argc,char** argv)
   glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
   glutInitWindowSize(w_width,w_height);
   glutInitWindowPosition(270,50);
-  glutCreateWindow("Tikinoid by Jalaz");
+  glutCreateWindow("Tik-i-noids by Jalaz");
   init();
   glutReshapeFunc(reshape);
   glutDisplayFunc(display);
