@@ -6,21 +6,21 @@
 #include <stdlib.h>
 #define PI 3.1415926535898
 
-float w_width=600.0,w_height=600.0;
+float w_width=700.0,w_height=700.0;
 float x=0.0,y=0.0;
 int s;
 int r;
-float xball=300.0,yball=300.0,a=1.0,b=1.0;
+float xball=325.0,yball=325.0,a=1.0,b=1.0;
 
 float speed[5]={0.05,0.08,0.1,0.14,0.18};
 int level=0;
 
 float xver,yver;
-int target[600][600];
+int target[700][700];
 
 int flag=1;
-
 int jz=0;
+int score=0;
 
 
 void init(void)
@@ -28,15 +28,16 @@ void init(void)
 glClearColor(1.0,1.0,1.0,0.0);
 glMatrixMode(GL_PROJECTION);
 glLoadIdentity();
-glOrtho(1,w_width,1,w_height,-1,1);
+glOrtho(1,700,1,700,-1,1);
 }
 
 
-//::::::::::::::TEXT Function:::::::::::://
+
+//::::::::::::::::TEXT FUNCTION:::::::::::::://
 void drawBitmapText(const char *string,float x,float y,float z)
 {
     const char *c;
-    glRasterPos3f(x, y,z);
+    glRasterPos3f(x,y,z);
 
     for (c=string; *c != '\0'; c++)
     {
@@ -55,8 +56,33 @@ void drawBitmapText1(const char *string,float x,float y,float z)
     }
 }
 
+void drawBitmapText(const char *string,float x,float y,float z)
+{
+    const char *c;
+    glRasterPos3f(x,y,z);
 
-//::::::::::::::::DISPLAY FUNCTION::::::::::://
+    for (c=string; *c != '\0'; c++)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, *c);
+    }
+}
+
+
+void drawBitmapText(const char *string,float x,float y,float z)
+{
+    const char *c;
+    glRasterPos3f(x,y,z);
+
+    for (c=string; *c != '\0'; c++)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, *c);
+    }
+}
+
+
+
+
+//::::::::::::::::Display Function::::::::::://
 void display(void)
 {
 glClear(GL_COLOR_BUFFER_BIT);
@@ -78,21 +104,98 @@ glEnd();
 glColor3f(0.0,0.0,0.0);
 glBegin(GL_POLYGON);
 {
-  glVertex3f(0.0,50.0,0.0);
-  glVertex3f(w_width,50.0,0.0);
-  glVertex3f(w_width,53.0,0.0);
-  glVertex3f(0.0,53.0,0.0);
+  glVertex3f(50.0,70.0,0.0);
+  glVertex3f(641.0,70.0,0.0);
+  glVertex3f(641.0,73.0,0.0);
+  glVertex3f(50.0,73.0,0.0);
 }
 glEnd();
 
 glBegin(GL_POLYGON);
 {
-  glVertex3f(0.0,17.0,0.0);
-  glVertex3f(w_width,17.0,0.0);
-  glVertex3f(w_width,20.0,0.0);
-  glVertex3f(0.0,20.0,0.0);
+  glVertex3f(50.0,37.0,0.0);
+  glVertex3f(641.0,37.0,0.0);
+  glVertex3f(641.0,40.0,0.0);
+  glVertex3f(50.0,40.0,0.0);
 }
 glEnd();
+
+
+//::::::::::External GAME BOUNDARY::::::::::://
+glColor3f(0.0,0.0,0.0);
+glBegin(GL_POLYGON);
+{
+  glVertex3f(10.0,10.0,0.0);
+  glVertex3f(690.0,10.0,0.0);
+  glVertex3f(690.0,12.0,0.0);
+  glVertex3f(10.0,12.0,0.0);
+}
+glEnd();
+
+glColor3f(0.0,0.0,0.0);
+glBegin(GL_POLYGON);
+{
+  glVertex3f(10.0,10.0,0.0);
+  glVertex3f(10.0,690.0,0.0);
+  glVertex3f(12.0,690.0,0.0);
+  glVertex3f(12.0,10.0,0.0);
+}
+glEnd();
+
+glColor3f(0.0,0.0,0.0);
+glBegin(GL_POLYGON);
+{
+  glVertex3f(10.0,690.0,0.0);
+  glVertex3f(690.0,690.0,0.0);
+  glVertex3f(690.0,688.0,0.0);
+  glVertex3f(10.0,688.0,0.0);
+}
+glEnd();
+
+glColor3f(0.0,0.0,0.0);
+glBegin(GL_POLYGON);
+{
+  glVertex3f(690.0,690.0,0.0);
+  glVertex3f(688.0,690.0,0.0);
+  glVertex3f(688.0,10.0,0.0);
+  glVertex3f(690.0,10.0,0.0);
+}
+glEnd();
+
+//:::::::::::INTERNAL GAMING PLATFORM BOUNDARY:::::::::::::::://
+
+glColor3f(0.0,0.0,0.0);
+glBegin(GL_POLYGON);
+{
+  glVertex3f(50.0,594.0,0.0);
+  glVertex3f(641.0,594.0,0.0);
+  glVertex3f(641.0,591.0,0.0);
+  glVertex3f(50.0,591.0,0.0);
+}
+glEnd();
+
+
+glColor3f(0.0,0.0,0.0);
+glBegin(GL_POLYGON);
+{
+  glVertex3f(50.0,594.0,0.0);
+  glVertex3f(47.0,594.0,0.0);
+  glVertex3f(47.0,37.0,0.0);
+  glVertex3f(50.0,37.0,0.0);
+}
+glEnd();
+
+glColor3f(0.0,0.0,0.0);
+glBegin(GL_POLYGON);
+{
+  glVertex3f(641.0,594.0,0.0);
+  glVertex3f(644.0,594.0,0.0);
+  glVertex3f(644.0,37.0,0.0);
+  glVertex3f(641.0,37.0,0.0);
+}
+glEnd();
+
+
 
 
 //::::::::::Target Blocks::::::::::://
@@ -100,7 +203,7 @@ if(flag==1)
 {
   for(s=590;s>440;s-=50)
     {
-      for(r=5;r<590;r+=50)
+      for(r=50;r<650;r+=50)
         {
           target[r][s]=1;
         }
@@ -114,7 +217,7 @@ glBegin(GL_QUADS);
 {
   for(s=590;s>440;s-=50)
   {
-    for(r=5;r<590;r+=50)
+    for(r=50;r<650;r+=50)
     {
       if(target[r][s]==1)
       {
@@ -132,7 +235,7 @@ glEnd();
 
 //::::::::::::Text:::::::::::://
 glColor3f(0.0,0.0,0.0);
-drawBitmapText("Welcome To Tik-i-noids!!",200,550,0);
+drawBitmapText("Welcome To Tik-i-noids!!",300,650,0);
 
 glColor3f(1.0,0.0,0.0);
 if(jz==1)
@@ -141,14 +244,13 @@ drawBitmapText1("!!!!GAME OVER!!!!",250,300,0);
 
 
 //:::::::::::::Block:::::::::::::::://
-
 glColor3f(1.0,0.0,1.0);
 glBegin(GL_QUADS);
 {
-  glVertex3f(260.0+x,20.0,0.0);
-  glVertex3f(340.0+x,20.0,0.0);
-  glVertex3f(340.0+x,50.0,0.0);
-  glVertex3f(260.0+x,50.0,0.0);
+  glVertex3f(310.0+x,40.0,0.0);
+  glVertex3f(390.0+x,40.0,0.0);
+  glVertex3f(390.0+x,70.0,0.0);
+  glVertex3f(310.0+x,70.0,0.0);
 }
 glEnd();
 glFinish();
@@ -156,7 +258,12 @@ glutSwapBuffers();
 
 }
 
-//::::::::::::::RESHAPE FUNCTION:::::::::::::::::://
+
+
+
+
+
+//::::::::::::::Reshape Function:::::::::::::::::://
 void reshape(int w, int h)
 {
 	w_height=h;
@@ -175,7 +282,7 @@ void againDisplay()
 
 for(s=590;s>=490;s-=50)
    {
-    for(r=5;r<590;r+=50)
+    for(r=50;r<650;r+=50)
      {
       if(target[r][s]==1)
       {
@@ -183,6 +290,7 @@ for(s=590;s>=490;s-=50)
         {
           b=-b;
           target[r][s]=0;
+          score++;
         }
       }
     }
@@ -190,22 +298,23 @@ for(s=590;s>=490;s-=50)
 
 
 
-  if(((xball<=340.0+x)&&(xball>=260.0+x))&&((yball>=55.0)&&(yball<=70.0)))
+  if(((xball<=390.0+x)&&(xball>=310.0+x))&&((yball>=75.0)&&(yball<=90.0)))
   b=-b ;
-  if(yball>600.0)
+
+  if(yball>590.0)
   b=-b;
 
-  if((xball>=600-10.0)||(xball<=10.0))
+  if((xball>=620.0)||(xball<=55.0))
   a=-a;
 
-  if(yball<=-20.0)
+  if(yball<=10.0)
   jz=1;
-
 
   if(yball<=-200.0)
   glutIdleFunc(NULL);
   else
   glutPostRedisplay();
+
 }
 
 //::::::::::::::::::::keyboard function:::::::::::::::::://
@@ -214,10 +323,10 @@ void keyboard(unsigned char key, int xm, int ym)
   switch (key)
     {
 
-      case 'a':x-=10;if(x<-260)x=-260;
+      case 'a':x-=10;if(x<-360)x=-360;
       break;
 
-      case 'd':x+=10; if(x>260)x=260;
+      case 'd':x+=10; if(x>360)x=360;
       break;
 
       case 49:level=0;
@@ -253,7 +362,7 @@ int main(int argc,char** argv)
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
   glutInitWindowSize(w_width,w_height);
-  glutInitWindowPosition(270,50);
+  glutInitWindowPosition(270,20);
   glutCreateWindow("Tik-i-noids by Jalaz");
   init();
   glutReshapeFunc(reshape);
