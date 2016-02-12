@@ -12,15 +12,17 @@ int s;
 int r;
 float xball=350.0,yball=350.0,a=1.0,b=1.0;
 
-float speed[5]={0.05,0.08,0.1,0.14,0.18};
+float speed[5]={0.1,0.15,0.18,0.22,0.25};
 int level=0;
 
 float xver,yver;
 int target[700][700];
 int font=0;
 int flag=1;
-int jz=0;
 int score=0;
+int play=1;
+
+char sc[4];
 
 
 void init(void)
@@ -41,14 +43,21 @@ void drawBitmapText(const char *string,float x,float y,float z)
 
     for (c=string; *c != '\0'; c++)
     {
-      if(font=0)
+      if(font==0)
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, *c);
-      else if(font=1)
-        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, *c);
-      else if(font=2)
-        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, *c);
-      else if(font=3)
-        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, *c);
+      else if(font==1)
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *c);
+      else if(font==2)
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10, *c);
+      else if(font==3)
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, *c);
+      else if(font==4)
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *c);
+      else if(font==5)
+        glutBitmapCharacter(GLUT_BITMAP_8_BY_13, *c);
+      else if(font==6)
+        glutBitmapCharacter(GLUT_BITMAP_9_BY_15, *c);
+
     }
 }
 
@@ -58,12 +67,14 @@ void drawBitmapText(const char *string,float x,float y,float z)
 void display(void)
 {
 glClear(GL_COLOR_BUFFER_BIT);
-glColor3f(0.0,0.0,1.0);
 
+//:::::::::::Ball:::::::::::://
+glColor3f(0.0,0.0,1.0);
 GLint circle_points=100,i;
 GLfloat angle;
 glBegin(GL_POLYGON);
-for(i=0;i<circle_points;i++) {
+for(i=0;i<circle_points;i++)
+  {
     angle=2*PI*i/circle_points;
     xver=xball+w_width*cos(angle)/35;
     yver=yball+w_height*sin(angle)/35;
@@ -74,17 +85,17 @@ glEnd();
 
 //::::::::::::Separator:::::::::::://
 glColor3f(0.0,0.0,0.0);
-glRectf(50.0,70.0,641.0,73.0);
+//glRectf(50.0,70.0,641.0,73.0);
 glRectf(50.0,37.0,641.0,40.0);
 
-//::::::::::External GAME BOUNDARY::::::::::://
+//::::::::::External Boundary::::::::::://
 glColor3f(0.0,0.0,0.0);
 glRectf(10.0,10.0,690.0,12.0);
 glRectf(10.0,10.0,12.0,690.0);
 glRectf(10.0,690.0,690.0,688.0);
 glRectf(690.0,690.0,688.0,10.0);
 
-//:::::::::::INTERNAL GAMING PLATFORM BOUNDARY:::::::::::::::://
+//:::::::::::Internal Gaming Platform Boundary:::::::::::::::://
 
 glColor3f(0.0,0.0,0.0);
 glRectf(50.0,594.0,641.0,591.0);
@@ -103,8 +114,6 @@ if(flag==1)
     }
   flag=0;
 }
-
-
 
 glBegin(GL_QUADS);
 {
@@ -128,14 +137,22 @@ glEnd();
 
 //::::::::::::Text:::::::::::://
 glColor3f(0.0,0.0,0.0);
-font=0;
-drawBitmapText("Welcome To Tik-i-noids!!",300,650,0);
-
+font=2;
+drawBitmapText("Welcome To Tik-i-noids!!",220,650,0);
+font=3;
+drawBitmapText("Score:",500,650,0);
+drawBitmapText(sc,550,650,0);
 glColor3f(1.0,0.0,0.0);
-if(jz==1)
-{font=1;
-drawBitmapText("!!!!GAME OVER!!!!",250,300,0);
-}
+  if(play==2)
+    {
+      font=1;
+      drawBitmapText("!!!!GAME OVER!!!!",230,350,0);
+
+      drawBitmapText("Your Score: ",230,300,0);
+      drawBitmapText(sc,360,300,0);
+      font=3;
+      drawBitmapText("Press R to Restart the game",250,250,0);
+    }
 
 
 //:::::::::::::Block:::::::::::::::://
@@ -152,8 +169,6 @@ glFinish();
 glutSwapBuffers();
 
 }
-
-
 
 
 
@@ -175,7 +190,7 @@ void againDisplay()
   xball=xball+(a*speed[level]);
   yball=yball+(b*speed[level]);
 
-for(s=590;s>=490;s-=50)
+  for(s=590;s>=490;s-=50)
    {
     for(r=50;r<650;r+=50)
      {
@@ -185,15 +200,14 @@ for(s=590;s>=490;s-=50)
         {
           b=-b;
           target[r][s]=0;
-          score++;
+          score+=10;
         }
       }
     }
   }
 
 
-
-  if(((xball<=390.0+x)&&(xball>=310.0+x))&&((yball>=75.0)&&(yball<=90.0)))
+  if(((xball<=400.0+x)&&(xball>=300.0+x))&&((yball>=75.0)&&(yball<=90.0)))
   b=-b ;
 
   if(yball>590.0)
@@ -202,14 +216,41 @@ for(s=590;s>=490;s-=50)
   if((xball>=620.0)||(xball<=65.0))
   a=-a;
 
-  if(yball<=10.0)
-  jz=1;
 
-  if(yball<=-200.0)
+
+  int s1,s2,s3,s4;
+  s1=score/1000;
+  s2=(score%1000)/100;
+  s3=(score%100)/10;
+  s4=score%10;
+  sc[0]=s1+48;
+  sc[1]=s2+48;
+  sc[2]=s3+48;
+  sc[3]=s4+48;
+
+
+
+  if(yball<=10.0)
+  play=2;
+
+  if(yball<=-20.0)
   glutIdleFunc(NULL);
-  else
+
   glutPostRedisplay();
 
+}
+
+//::::::::::::Restart Function::::::::::::::://
+void restart(void)
+{
+  play=1;
+  flag=1;
+  x=0.0,y=0.0;
+  xball=350.0,yball=350.0,a=1.0,b=1.0;
+  score=0;
+  level=0;
+
+  glutPostRedisplay();
 }
 
 //::::::::::::::::::::keyboard function:::::::::::::::::://
@@ -218,10 +259,10 @@ void keyboard(unsigned char key, int xm, int ym)
   switch (key)
     {
 
-      case 'a':x-=10;if(x<-360)x=-360;
+      case 'a':x-=15;if(x<-260)x=-260;
       break;
 
-      case 'd':x+=10; if(x>360)x=360;
+      case 'd':x+=15; if(x>251)x=251;
       break;
 
       case 49:level=0;
@@ -239,12 +280,13 @@ void keyboard(unsigned char key, int xm, int ym)
       case 53:level=4;
       break;
 
-      case 'p':glutIdleFunc(againDisplay);     //Start the game
+      case 's':glutIdleFunc(againDisplay);     //Start the game
       break;
 
-      case 's':glutIdleFunc(NULL);            //Pause the game
+      case 'p':glutIdleFunc(NULL);            //Pause the game
       break;
 
+      case 'r':glutIdleFunc(restart);
       default:
       break;
     }
