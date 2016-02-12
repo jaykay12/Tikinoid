@@ -137,11 +137,22 @@ glEnd();
 
 //::::::::::::Text:::::::::::://
 glColor3f(0.0,0.0,0.0);
+font=1;
+drawBitmapText("  Tik-i-noids",260,665,0);
+
+font=5;
+drawBitmapText("Project: Contributed for Integrated Console Development Project Using openGL",60,650,0);
+drawBitmapText("Developer: Jalaz Kumar",60,638,0);
+
 font=2;
-drawBitmapText("Welcome To Tik-i-noids!!",220,650,0);
-font=3;
-drawBitmapText("Score:",500,650,0);
-drawBitmapText(sc,550,650,0);
+drawBitmapText("Instructions:",60,618,0);
+drawBitmapText("PRESS:  S-Start   P-Pause   A-Left Shift  D-Right Shift",60,608,0);
+
+font=4;
+drawBitmapText("Score:",500,610,0);
+drawBitmapText(sc,550,610,0);
+
+
 glColor3f(1.0,0.0,0.0);
   if(play==2)
     {
