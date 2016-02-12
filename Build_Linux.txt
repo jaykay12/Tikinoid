@@ -1,0 +1,50 @@
+Tikinoid: An open source Game for windows and linux platform using openGL library in C++ programming language
+
+For Buliding and running the game on linux. Follow the steps: 
+
+	1- Installing openGL library and Dependencies on your linux(Specified for Ubuntu)
+
+		1- To install GLUT, open terminal and type 				>>sudo apt-get install freeglut3-dev
+
+		2-     Here is a simple graphics program using GLUT
+
+				/*  check.c*/
+				#include <GL/gl.h>
+				#include <GL/glut.h>
+				#include <GL/glu.h>
+				void setup() 
+					{   glClearColor(1.0f, 1.0f, 1.0f, 1.0f); }
+				void display()
+				   {
+				      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+				      glColor3f(0.0f, 0.0f, 0.0f);
+				      glRectf(-0.75f,0.75f, 0.75f, -0.75f);
+				      glutSwapBuffers();
+				   }
+				int main(int argc, char *argv[])
+				  {
+				     glutInit(&argc, argv);
+				     glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | GLUT_DOUBLE);
+				     glutInitWindowSize(800,600);
+				     glutCreateWindow("Hello World");
+
+				     setup();
+				     glutDisplayFunc(display);
+				     glutMainLoop();
+				     return 0;
+				  }
+
+		3- Compile it using:  			>>gcc check.c -o demo -lglut -lGL
+
+		4- Run it using 				>>./demo
+
+
+	You have succesfully installed openGL library in your linux platform.
+
+	2- Clone the repository on your system. Open the directory where it is downloaded.
+
+	2- For Compilation: 		>>g++ tikinoid_code.cpp -o tikinoid_code -lglut -lGL
+
+	3- For Running: 			>>./tikinoid_code
+
+	4- Try a hand, find bugs, File issues, Submit your pull request and Contribute freely.

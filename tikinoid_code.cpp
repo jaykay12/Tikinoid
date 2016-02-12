@@ -10,14 +10,14 @@ float w_width=700.0,w_height=700.0;
 float x=0.0,y=0.0;
 int s;
 int r;
-float xball=325.0,yball=325.0,a=1.0,b=1.0;
+float xball=350.0,yball=350.0,a=1.0,b=1.0;
 
 float speed[5]={0.05,0.08,0.1,0.14,0.18};
 int level=0;
 
 float xver,yver;
 int target[700][700];
-
+int font=0;
 int flag=1;
 int jz=0;
 int score=0;
@@ -41,44 +41,16 @@ void drawBitmapText(const char *string,float x,float y,float z)
 
     for (c=string; *c != '\0'; c++)
     {
+      if(font=0)
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, *c);
+      else if(font=1)
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, *c);
+      else if(font=2)
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, *c);
+      else if(font=3)
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, *c);
     }
 }
-
-void drawBitmapText1(const char *string,float x,float y,float z)
-{
-    const char *c;
-    glRasterPos3f(x, y,z);
-
-    for (c=string; *c != '\0'; c++)
-    {
-        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *c);
-    }
-}
-
-void drawBitmapText(const char *string,float x,float y,float z)
-{
-    const char *c;
-    glRasterPos3f(x,y,z);
-
-    for (c=string; *c != '\0'; c++)
-    {
-        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, *c);
-    }
-}
-
-
-void drawBitmapText(const char *string,float x,float y,float z)
-{
-    const char *c;
-    glRasterPos3f(x,y,z);
-
-    for (c=string; *c != '\0'; c++)
-    {
-        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, *c);
-    }
-}
-
 
 
 
@@ -102,101 +74,22 @@ glEnd();
 
 //::::::::::::Separator:::::::::::://
 glColor3f(0.0,0.0,0.0);
-glBegin(GL_POLYGON);
-{
-  glVertex3f(50.0,70.0,0.0);
-  glVertex3f(641.0,70.0,0.0);
-  glVertex3f(641.0,73.0,0.0);
-  glVertex3f(50.0,73.0,0.0);
-}
-glEnd();
-
-glBegin(GL_POLYGON);
-{
-  glVertex3f(50.0,37.0,0.0);
-  glVertex3f(641.0,37.0,0.0);
-  glVertex3f(641.0,40.0,0.0);
-  glVertex3f(50.0,40.0,0.0);
-}
-glEnd();
-
+glRectf(50.0,70.0,641.0,73.0);
+glRectf(50.0,37.0,641.0,40.0);
 
 //::::::::::External GAME BOUNDARY::::::::::://
 glColor3f(0.0,0.0,0.0);
-glBegin(GL_POLYGON);
-{
-  glVertex3f(10.0,10.0,0.0);
-  glVertex3f(690.0,10.0,0.0);
-  glVertex3f(690.0,12.0,0.0);
-  glVertex3f(10.0,12.0,0.0);
-}
-glEnd();
-
-glColor3f(0.0,0.0,0.0);
-glBegin(GL_POLYGON);
-{
-  glVertex3f(10.0,10.0,0.0);
-  glVertex3f(10.0,690.0,0.0);
-  glVertex3f(12.0,690.0,0.0);
-  glVertex3f(12.0,10.0,0.0);
-}
-glEnd();
-
-glColor3f(0.0,0.0,0.0);
-glBegin(GL_POLYGON);
-{
-  glVertex3f(10.0,690.0,0.0);
-  glVertex3f(690.0,690.0,0.0);
-  glVertex3f(690.0,688.0,0.0);
-  glVertex3f(10.0,688.0,0.0);
-}
-glEnd();
-
-glColor3f(0.0,0.0,0.0);
-glBegin(GL_POLYGON);
-{
-  glVertex3f(690.0,690.0,0.0);
-  glVertex3f(688.0,690.0,0.0);
-  glVertex3f(688.0,10.0,0.0);
-  glVertex3f(690.0,10.0,0.0);
-}
-glEnd();
+glRectf(10.0,10.0,690.0,12.0);
+glRectf(10.0,10.0,12.0,690.0);
+glRectf(10.0,690.0,690.0,688.0);
+glRectf(690.0,690.0,688.0,10.0);
 
 //:::::::::::INTERNAL GAMING PLATFORM BOUNDARY:::::::::::::::://
 
 glColor3f(0.0,0.0,0.0);
-glBegin(GL_POLYGON);
-{
-  glVertex3f(50.0,594.0,0.0);
-  glVertex3f(641.0,594.0,0.0);
-  glVertex3f(641.0,591.0,0.0);
-  glVertex3f(50.0,591.0,0.0);
-}
-glEnd();
-
-
-glColor3f(0.0,0.0,0.0);
-glBegin(GL_POLYGON);
-{
-  glVertex3f(50.0,594.0,0.0);
-  glVertex3f(47.0,594.0,0.0);
-  glVertex3f(47.0,37.0,0.0);
-  glVertex3f(50.0,37.0,0.0);
-}
-glEnd();
-
-glColor3f(0.0,0.0,0.0);
-glBegin(GL_POLYGON);
-{
-  glVertex3f(641.0,594.0,0.0);
-  glVertex3f(644.0,594.0,0.0);
-  glVertex3f(644.0,37.0,0.0);
-  glVertex3f(641.0,37.0,0.0);
-}
-glEnd();
-
-
-
+glRectf(50.0,594.0,641.0,591.0);
+glRectf(50.0,594.0,47.0,37.0);
+glRectf(641.0,594.0,644.0,37.0);
 
 //::::::::::Target Blocks::::::::::://
 if(flag==1)
@@ -235,12 +128,14 @@ glEnd();
 
 //::::::::::::Text:::::::::::://
 glColor3f(0.0,0.0,0.0);
+font=0;
 drawBitmapText("Welcome To Tik-i-noids!!",300,650,0);
 
 glColor3f(1.0,0.0,0.0);
 if(jz==1)
-drawBitmapText1("!!!!GAME OVER!!!!",250,300,0);
-
+{font=1;
+drawBitmapText("!!!!GAME OVER!!!!",250,300,0);
+}
 
 
 //:::::::::::::Block:::::::::::::::://
@@ -304,7 +199,7 @@ for(s=590;s>=490;s-=50)
   if(yball>590.0)
   b=-b;
 
-  if((xball>=620.0)||(xball<=55.0))
+  if((xball>=620.0)||(xball<=65.0))
   a=-a;
 
   if(yball<=10.0)
