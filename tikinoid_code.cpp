@@ -72,7 +72,8 @@ void display(void)
 {
 glClear(GL_COLOR_BUFFER_BIT);
   if(option==0)
-  { glClearColor(0.52,0.80,1.0,0.0);
+  { glColor3f(0.52,0.80,1.0);
+    glRectf(0.0,0.0,600.0,600.0);
     glColor3f(0.0,0.0,0.0);
     font=1;
     drawBitmapText("Press L for Level Mode",220,450,0);
@@ -86,9 +87,11 @@ glClear(GL_COLOR_BUFFER_BIT);
 
   else if(option==3)
   {
-    glClear(GL_COLOR_BUFFER_BIT);
-    glClearColor(1.0,0.75,0.14,0.0);
+    glColor3f(1.0,0.75,0.14);
+    glRectf(0.0,0.0,700.0,700.0);
     glColor3f(0.0,0.0,0.0);
+    font=2;
+    drawBitmapText("Press H for HOME",550,20,0);
     font=1;
     drawBitmapText("Graphics Project",250,500,0);
     font=5;
@@ -189,8 +192,10 @@ glClear(GL_COLOR_BUFFER_BIT);
       drawBitmapText("Instructions:",60,618,0);
       drawBitmapText("PRESS:  S-Start   P-Pause   A-Left Shift  D-Right Shift",60,608,0);
 
-      font=4;
+      font=2;
+      drawBitmapText("Press H for HOME",550,20,0);
 
+      font=4;
       if(option==2)
       {
         drawBitmapText("Score:",500,610,0);
@@ -374,6 +379,16 @@ void keyboard(unsigned char key, int xm, int ym)
       case 'q':exit(0);
     }
   }
+
+  else if(option==3)
+  {
+    if(key='h')
+    {
+      option=0;
+      glutPostRedisplay();
+    }
+  }
+
   else
   {
   switch (key)
@@ -398,6 +413,9 @@ void keyboard(unsigned char key, int xm, int ym)
       break;
 
       case 53:level=4;
+      break;
+
+      case 'h':option=0; glutPostRedisplay();
       break;
 
       case 's':glutIdleFunc(againDisplay);     //Start the game
