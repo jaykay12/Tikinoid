@@ -71,46 +71,134 @@ void drawBitmapText(const char *string,float x,float y,float z)
 void display(void)
 {
 glClear(GL_COLOR_BUFFER_BIT);
+
+//--------HOME SCREEN-------//
   if(option==0)
-  { glColor3f(0.52,0.80,1.0);
+  {
+    glColor3f(0.52,0.80,1.0);
     glRectf(0.0,0.0,600.0,600.0);
+
+    glColor3f(0.92,0.56,0.12);
+    glRectf(280.0,345.0,407.0,375.0);
+    glRectf(283.0,295.0,408.0,325.0);
+    glRectf(273.0,245.0,422.0,275.0);
+    glRectf(303.0,195.0,383.0,225.0);
+    glRectf(283.0,145.0,402.0,175.0);
+
+
     glColor3f(0.0,0.0,0.0);
     font=1;
-    drawBitmapText("Press L for Level Mode",220,450,0);
-    drawBitmapText("Press T for Target Mode",218,400,0);
-    drawBitmapText("Press C for Credits",248,350,0);
-    drawBitmapText("Press Q for Quit Game",230,300,0);
+
+    drawBitmapText("Instructions",285,350,0);
+    drawBitmapText("Level Mode",288,300,0);
+    drawBitmapText("Survival Mode",278,250,0);
+    drawBitmapText("Credits",308,200,0);
+    drawBitmapText("Quit Game",288,150,0);
     glFinish();
     glutSwapBuffers();
-
   }
 
+
+//-------------CREDITS PAGE---------//
   else if(option==3)
   {
-    glColor3f(1.0,0.75,0.14);
-    glRectf(0.0,0.0,700.0,700.0);
-    glColor3f(0.0,0.0,0.0);
-    font=2;
-    drawBitmapText("Press H for HOME",550,20,0);
-    font=1;
-    drawBitmapText("Graphics Project",250,500,0);
-    font=5;
-    drawBitmapText("Integrated Gaming Console Development using openGL",140,470,0);
-    font=4;
-    drawBitmapText("Developer : Jalaz Kumar    NIT Hamirpur",125,400,0);
-    font=1;
-    drawBitmapText("Special Thanks to:",240,300,0);
-    font=4;
-    drawBitmapText("Debugger : Sukhbir Singh         NIT Hamirpur",125,250,0);
-    drawBitmapText("Tester :   Narendra Dodwaria     NIT Hamirpur",125,200,0);
+      glColor3f(1.0,0.75,0.14);
+      glRectf(0.0,0.0,700.0,700.0);
+
+
+
+        glColor3f(0.59,0.43,1.0);
+        glRectf(525.0,15.0,595.0,37.0);
+        glColor3f(0.0,0.0,0.0);
+        font=4;
+        drawBitmapText("HOME",530,20,0);
+
+        font=1;
+        drawBitmapText(" TIK-i-NOID",250,550,0);
+        font=5;
+        drawBitmapText("Integrated Gaming Console Development using openGL",140,520,0);
+        font=4;
+        drawBitmapText("Developer :         Jalaz Kumar                      NIT Hamirpur",125,400,0);
+        font=5;
+        drawBitmapText("Special Thanks to:",250,300,0);
+        font=4;
+        drawBitmapText("Debugger :       Sukhbir Singh                       NIT Hamirpur",125,250,0);
+        drawBitmapText("Tester :             Narendra Dodwaria               NIT Hamirpur",125,200,0);
     glFinish();
     glutSwapBuffers();
   }
 
+
+  //-------------INSTRUCTION PAGE-------------//
+
+  else if(option==4)
+  {
+    //glColor3f(1.0,0.70,0.76);
+    glColor3f(1.0,0.50,0.66);
+    glRectf(0.0,0.0,700.0,700.0);
+
+    glColor3f(0.59,0.43,1.0);
+    glRectf(525.0,15.0,595.0,37.0);
+    glColor3f(0.0,0.0,0.0);
+    font=4;
+    drawBitmapText("HOME",530,20,0);
+
+
+    glColor3f(0.0,0.0,0.0);
+    font=1;
+    drawBitmapText("TIK-i-NOID",250,600,0);
+    font=5;
+    drawBitmapText("Integrated Gaming Console Development using openGL",140,570,0);
+
+    font=4;
+    drawBitmapText("Control Panel",270,450,0);
+    font=3;
+
+    drawBitmapText(" A                      -        Shift Left",180,400,0);
+    drawBitmapText(" D                      -        Shift Right",180,380,0);
+    drawBitmapText(" Keys(1,2,3,4,5)  -        Toggle Levels in Level Mode",180,360,0);
+
+    font=4;
+    drawBitmapText("Keyboard Shortcut",250,300,0);
+    font=3;
+    drawBitmapText(" H                     -        Home",180,250,0);
+    drawBitmapText(" R                     -        Restart",180,230,0);
+    drawBitmapText(" O                     -        Start Game",180,210,0);
+    drawBitmapText(" P                     -        Pause Game",180,190,0);
+    drawBitmapText(" L                      -        Level Game Mode",180,170,0);
+    drawBitmapText(" S                     -        Survival Game Mode",180,150,0);
+    drawBitmapText(" C                     -        Credits",180,130,0);
+    drawBitmapText(" I                       -        Instructions",180,110,0);
+
+    glFinish();
+    glutSwapBuffers();
+  }
+
+//--------------GAMING PLATFORM-------//
   else
   {
+    if(option==2)
+    {
+      glColor3f(0.07,0.07,0.07);
+      glRectf(0.0,0.0,700.0,700.0);
+    }
+
+    else if(option==1)
+    {
+      glColor3f(1.0,1.0,1.0);
+      glRectf(0.0,0.0,700.0,700.0);
+    }
+    else if(option==4)
+    {
+      glColor3f(1.0,0.70,0.76);
+      glRectf(0.0,0.0,700.0,700.0);
+    }
+
+
       //:::::::::::Ball:::::::::::://
+      if(option==2)
       glColor3f(0.0,0.0,1.0);
+      else glColor3f(0.0,1.0,1.0);
       GLint circle_points=100,i;
       GLfloat angle;
       glBegin(GL_POLYGON);
@@ -125,12 +213,17 @@ glClear(GL_COLOR_BUFFER_BIT);
 
 
       //::::::::::::Separator:::::::::::://
+      if(option==2)
       glColor3f(1.0,1.0,1.0);
+      else glColor3f(0.0,0.0,0.0);
       //glRectf(50.0,70.0,641.0,73.0);
       glRectf(50.0,37.0,641.0,40.0);
 
       //::::::::::External Boundary::::::::::://
-      glColor3f(0.44,0.44,0.77);
+      if(option==2)
+      glColor3f(1.0,1.0,1.0);
+      else glColor3f(0.44,0.44,0.77);
+
       glRectf(10.0,10.0,690.0,12.0);
       glRectf(10.0,10.0,12.0,690.0);
       glRectf(10.0,690.0,690.0,688.0);
@@ -138,7 +231,10 @@ glClear(GL_COLOR_BUFFER_BIT);
 
       //:::::::::::Internal Gaming Platform Boundary:::::::::::::::://
 
-      glColor3f(0.66,0.66,0.66);
+      if(option==2)
+      glColor3f(1.0,1.0,1.0);
+      else glColor3f(0.0,0.0,0.0);
+
       glRectf(50.0,594.0,641.0,591.0);
       glRectf(50.0,594.0,47.0,37.0);
       glRectf(641.0,594.0,644.0,37.0);
@@ -180,31 +276,35 @@ glClear(GL_COLOR_BUFFER_BIT);
     }
 
       //::::::::::::Text:::::::::::://
+      if(option==2)
       glColor3f(1.0,1.0,1.0);
+      else glColor3f(0.0,0.0,0.0);
       font=1;
       drawBitmapText("  Tik-i-noids",260,665,0);
 
       font=5;
-      drawBitmapText("Project: Contributed for Integrated Console Development Project Using openGL",60,650,0);
-      drawBitmapText("Developer: Jalaz Kumar",60,638,0);
+      drawBitmapText("  Developer: Jalaz Kumar",60,648,0);
 
-      font=2;
-      drawBitmapText("Instructions:",60,618,0);
-      drawBitmapText("PRESS:  S-Start   P-Pause   A-Left Shift  D-Right Shift",60,608,0);
+      glColor3f(0.59,0.43,1.0);
+      glRectf(75.0,610.0,145.0,632.0);
+      glColor3f(0.0,0.0,0.0);
+      font=4;
+      drawBitmapText("HOME",80,615,0);
 
-      font=2;
-      drawBitmapText("Press H for HOME",550,20,0);
-
+      if(option==2)
+      glColor3f(1.0,1.0,1.0);
+      else
+      glColor3f(0.0,0.0,0.0);
       font=4;
       if(option==2)
       {
-        drawBitmapText("Score:",500,610,0);
-        drawBitmapText(sc2,560,610,0);
+        drawBitmapText("Score:",500,615,0);
+        drawBitmapText(sc2,560,615,0);
       }
       else if(option==1)
       {
-        drawBitmapText("Score:",500,610,0);
-        drawBitmapText(sc1,560,610,0);
+        drawBitmapText("Score:",500,615,0);
+        drawBitmapText(sc1,560,615,0);
 
       }
 
@@ -213,16 +313,16 @@ glClear(GL_COLOR_BUFFER_BIT);
         if(play==2)
           {
             font=1;
-            drawBitmapText("!!!!GAME OVER!!!!",220,350,0);
+            drawBitmapText("!!!!GAME OVER!!!!",235,350,0);
             if(option==1)
             {
-              drawBitmapText("Your Score :- ",230,300,0);
-              drawBitmapText(sc1,370,300,0);
+              drawBitmapText("Your Score :",245,300,0);
+              drawBitmapText(sc1,385,299,0);
             }
             else if(option==2)
             {
-              drawBitmapText("Your Score :- ",230,300,0);
-              drawBitmapText(sc2,370,300,0);
+              drawBitmapText("Your Score :",245,300,0);
+              drawBitmapText(sc2,385,299,0);
 
             }
             font=3;
@@ -231,7 +331,9 @@ glClear(GL_COLOR_BUFFER_BIT);
 
 
       //:::::::::::::Block:::::::::::::::://
-      glColor3f(1.0,0.0,1.0);
+      if(option==2)
+      glColor3f(1.0,0.0,0.0);
+      else glColor3f(1.0,0.0,1.0);
       glBegin(GL_QUADS);
       {
         glVertex3f(310.0+x,40.0,0.0);
@@ -354,6 +456,8 @@ void restart(void)
   x=0.0,y=0.0;
   xball=350.0,yball=350.0,a=1.0,b=1.0;
   score1=0;
+  score2=0;
+  speed1=0.08;
   level=0;
 
   glutPostRedisplay();
@@ -370,17 +474,20 @@ void keyboard(unsigned char key, int xm, int ym)
       case 'l':option=1; glutPostRedisplay();
       break;
 
-      case 't':option=2; glutPostRedisplay();
+      case 's':option=2; glutPostRedisplay();
       break;
 
       case 'c':option=3; glutPostRedisplay();
+      break;
+
+      case 'i':option=4; glutPostRedisplay();
       break;
 
       case 'q':exit(0);
     }
   }
 
-  else if(option==3)
+  else if(option==3||option==4)
   {
     if(key='h')
     {
@@ -418,7 +525,7 @@ void keyboard(unsigned char key, int xm, int ym)
       case 'h':option=0; glutPostRedisplay();
       break;
 
-      case 's':glutIdleFunc(againDisplay);     //Start the game
+      case 'o':glutIdleFunc(againDisplay);     //Start the game
       break;
 
       case 'p':glutIdleFunc(NULL);            //Pause the game
