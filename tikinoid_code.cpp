@@ -539,6 +539,65 @@ void keyboard(unsigned char key, int xm, int ym)
 }
 
 
+//:::::::::::::::MOUSE FUNCTION:::::::::::::::://
+void mouse(int button, int state, int x, int y)
+  {
+    switch (button)
+    {
+      case GLUT_LEFT_BUTTON:
+      if (state==GLUT_DOWN)
+      {
+        if(option==0)
+        {
+          if(x>=285 && x<=407 && y<=405 && y>=380 )
+          {
+            option=1;
+            glutPostRedisplay();
+          }
+          if(x>=273 && x<=422 && y<=455 && y>=430 )
+          {
+            option=2;
+            glutPostRedisplay();
+          }
+          if(x>=303 && x<=383 && y<=505 && y>=480 )
+          {
+            option=3;
+            glutPostRedisplay();
+          }
+          if(x>=283 && x<=407 && y<=355 && y>=330 )
+          {
+            option=4;
+            glutPostRedisplay();
+          }
+          if(x>=285 && x<=400 && y<=555 && y>=528 )
+          exit(0);
+        }
+
+        else if(option==1||option==2)
+        {
+          if(x>=75 && x<=145 && y<=90 && y>=70 )
+          {
+            option=0;
+            glutPostRedisplay();
+          }
+        }
+
+        else if(option==3||option==4)
+        {
+          if(x>=525 && x<=595 && y<=686 && y>=666 )
+          {
+            option=0;
+            glutPostRedisplay();
+          }
+        }
+
+      }
+      default:
+      break;
+}
+}
+
+
 
 int main(int argc,char** argv)
 {
@@ -551,6 +610,7 @@ int main(int argc,char** argv)
   glutReshapeFunc(reshape);
   glutDisplayFunc(display);
   glutKeyboardFunc(keyboard);
+  glutMouseFunc(mouse);
   glutMainLoop();
   return 0;
 }
