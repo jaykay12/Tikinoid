@@ -34,9 +34,11 @@ For Buliding and running the game on linux. Follow the steps:
 				     return 0;
 				  }
 
-		3- Compile it using:  			>>gcc check.c -o demo -lglut -lGL
+		3- Compile it using:  			>>gcc check.c -o check -lglut -lGL
 
-		4- Run it using 				>>./demo
+		4- Run it using 				>>./check
+	
+		5- If a new window console opens showing up a black coloured rectangle.
 
 
 	You have succesfully installed openGL library in your linux platform.
