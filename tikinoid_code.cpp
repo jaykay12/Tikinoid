@@ -114,16 +114,16 @@ glClear(GL_COLOR_BUFFER_BIT);
         drawBitmapText("HOME",530,20,0);
 
         font=1;
-        drawBitmapText(" TIK-i-NOID",250,550,0);
+        drawBitmapText(" TIK-i-NOIDS",260,550,0);
         font=5;
-        drawBitmapText("Integrated Gaming Console Development using openGL",140,520,0);
+        drawBitmapText("Integrated Gaming Console Development using openGL",150,520,0);
+        font=1;
+        drawBitmapText("Developed  By: ",70,280,0);
         font=4;
-        drawBitmapText("Developer :         Jalaz Kumar                      NIT Hamirpur",125,400,0);
-        font=5;
-        drawBitmapText("Special Thanks to:",250,300,0);
+        drawBitmapText("Jalaz Kumar",280,280,0);
         font=4;
-        drawBitmapText("Debugger :       Sukhbir Singh                       NIT Hamirpur",125,250,0);
-        drawBitmapText("Tester :             Narendra Dodwaria               NIT Hamirpur",125,200,0);
+        drawBitmapText("Department of Computer Science And Engineering",280,250,0);
+        drawBitmapText("National Institute of Technology, Hamirpur(H.P.)",280,220,0);
     glFinish();
     glutSwapBuffers();
   }
@@ -146,28 +146,28 @@ glClear(GL_COLOR_BUFFER_BIT);
 
     glColor3f(0.0,0.0,0.0);
     font=1;
-    drawBitmapText("TIK-i-NOID",250,600,0);
+    drawBitmapText("TIK-i-NOIDS",260,600,0);
     font=5;
-    drawBitmapText("Integrated Gaming Console Development using openGL",140,570,0);
+    drawBitmapText("Integrated Gaming Console Development using openGL",150,570,0);
 
     font=4;
-    drawBitmapText("Control Panel",270,450,0);
+    drawBitmapText("Control Panel",280,450,0);
     font=3;
 
     drawBitmapText(" A                      -        Shift Left",180,400,0);
     drawBitmapText(" D                      -        Shift Right",180,380,0);
-    drawBitmapText(" Keys(1,2,3,4,5)  -        Toggle Levels in Level Mode",180,360,0);
+    drawBitmapText(" Keys(1,2,3,4,5)   -        Toggle Levels in Level Mode",180,360,0);
 
     font=4;
     drawBitmapText("Keyboard Shortcut",250,300,0);
     font=3;
-    drawBitmapText(" H                     -        Home",180,250,0);
-    drawBitmapText(" R                     -        Restart",180,230,0);
-    drawBitmapText(" O                     -        Start Game",180,210,0);
-    drawBitmapText(" P                     -        Pause Game",180,190,0);
-    drawBitmapText(" L                      -        Level Game Mode",180,170,0);
-    drawBitmapText(" S                     -        Survival Game Mode",180,150,0);
-    drawBitmapText(" C                     -        Credits",180,130,0);
+    drawBitmapText(" H                      -        Home",180,250,0);
+    drawBitmapText(" R                      -        Restart",180,230,0);
+    drawBitmapText(" O                      -        Start Game",180,210,0);
+    drawBitmapText(" P                      -        Pause Game",180,190,0);
+    drawBitmapText(" L                       -        Level Game Mode",180,170,0);
+    drawBitmapText(" S                      -        Survival Game Mode",180,150,0);
+    drawBitmapText(" C                      -        Credits",180,130,0);
     drawBitmapText(" I                       -        Instructions",180,110,0);
 
     glFinish();
