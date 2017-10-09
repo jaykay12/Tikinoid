@@ -1,4 +1,4 @@
-Tikinoid: An open source Game for windows and linux platform using openGL library in C++ programming language
+Tikinoid: An open source Free Game for windows and linux platform using openGL library in C++ programming language
 
 For Buliding and running the game on linux. Follow the steps: 
 
