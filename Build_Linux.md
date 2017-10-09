@@ -4,7 +4,8 @@ For Buliding and running the game on linux. Follow the steps:
 
 	1- Installing openGL library and Dependencies on your linux(Specified for Ubuntu)
 
-		1- To install GLUT, open terminal and type 				>>sudo apt-get install freeglut3-dev
+		1- To install GLUT, open terminal and type 				
+			`sudo apt-get install freeglut3-dev`
 
 		2-     Here is a simple graphics program using GLUT
 
