@@ -1,8 +1,8 @@
-#Tikinoid
+# Tikinoid
 
-##Open Source game developed for **Windows** and **linux** platform using **OpenGL** library in C++.
+## Open Source game developed for **Windows** and **linux** platform using **OpenGL** library in C++.
 
-###Getting Started with the project :-
+### Getting Started with the project :-
 
 1. Firstly, **fork** this repo from **jaykay12/Tikinoid** by clicking on fork button.
 
@@ -16,7 +16,7 @@
 
 4. For Further help in linux platform Go through **Build_linux.txt**.
 
-###How to contribute in this project :-
+### How to contribute in this project :-
 
 1. Go through the entire project after building it, find bugs and report them.
 
